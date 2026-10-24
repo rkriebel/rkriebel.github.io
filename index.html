@@ -7,7 +7,7 @@
   <meta name="description" content="The Floral Evolution Lab, led by Ricardo Kriebel — research on how flowers evolve.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -428,12 +428,41 @@
       <h3 class="sub">Biodiversity Posters</h3>
       <p class="lead">Each poster brings together the flowers of a single family or region, photographed and arranged by color. Click a poster to view it larger; click again to zoom in.</p>
       <!-- To add a poster: put the web-sized images in posters/thumbs and posters/full, then copy one <figure> below. -->
-      <div class="poster-grid" id="posters">
-        <figure class="poster" tabindex="0" data-full="posters/full/poster_Acanthaceae_2025.webp"><img loading="lazy" src="posters/thumbs/poster_Acanthaceae_2025.webp" width="487" height="700" alt="Acanthaceae of Costa Rica poster"><figcaption><strong>Acanthaceae</strong> Costa Rica</figcaption></figure>
-        <figure class="poster" tabindex="0" data-full="posters/full/poster_gesneriaceae_CR.webp"><img loading="lazy" src="posters/thumbs/poster_gesneriaceae_CR.webp" width="507" height="700" alt="Gesneriaceae of Costa Rica poster"><figcaption><strong>Gesneriaceae</strong> Costa Rica</figcaption></figure>
-        <figure class="poster" tabindex="0" data-full="posters/full/escazu_flora.webp"><img loading="lazy" src="posters/thumbs/escazu_flora.webp" width="500" height="700" alt="Flora of the Cerros de Escazú poster"><figcaption><strong>Cerros de Escazú</strong> Costa Rica</figcaption></figure>
-        <figure class="poster" tabindex="0" data-full="posters/full/poster_valle_central_2021.webp"><img loading="lazy" src="posters/thumbs/poster_valle_central_2021.webp" width="500" height="700" alt="Flora de San José poster"><figcaption><strong>Flora de San José</strong> Costa Rica</figcaption></figure>
-        <figure class="poster" tabindex="0" data-full="posters/full/poster_madison.webp"><img loading="lazy" src="posters/thumbs/poster_madison.webp" width="489" height="700" alt="Flora of Madison poster"><figcaption><strong>Flora of Madison</strong> Wisconsin</figcaption></figure>
+      <div id="posters">
+        <h4 class="poster-group">Costa Rica <span>5</span></h4>
+        <div class="poster-grid">
+          <figure class="poster" tabindex="0" data-full="posters/full/poster_Acanthaceae_2025.webp"><img loading="lazy" src="posters/thumbs/poster_Acanthaceae_2025.webp" width="487" height="700" alt="Acanthaceae – Costa Rica poster"><figcaption><strong>Acanthaceae</strong>Costa Rica</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/poster_gesneriaceae_CR.webp"><img loading="lazy" src="posters/thumbs/poster_gesneriaceae_CR.webp" width="507" height="700" alt="Gesneriaceae – Costa Rica poster"><figcaption><strong>Gesneriaceae</strong>Costa Rica</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/poster_melastomataceae_CR_2025.webp"><img loading="lazy" src="posters/thumbs/poster_melastomataceae_CR_2025.webp" width="503" height="700" alt="Melastomataceae – Costa Rica poster"><figcaption><strong>Melastomataceae</strong>Costa Rica</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/escazu_flora.webp"><img loading="lazy" src="posters/thumbs/escazu_flora.webp" width="500" height="700" alt="Cerros de Escazú – Costa Rica poster"><figcaption><strong>Cerros de Escazú</strong>Costa Rica</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/poster_valle_central_2021.webp"><img loading="lazy" src="posters/thumbs/poster_valle_central_2021.webp" width="500" height="700" alt="Flora de San José – Costa Rica poster"><figcaption><strong>Flora de San José</strong>Costa Rica</figcaption></figure>
+        </div>
+        <h4 class="poster-group">San Francisco Botanical Garden <span>16</span></h4>
+        <div class="poster-grid">
+          <figure class="poster" tabindex="0" data-full="posters/full/SFBG_1.webp"><img loading="lazy" src="posters/thumbs/SFBG_1.webp" width="496" height="700" alt="San Francisco Botanical Garden – Winter–Spring poster"><figcaption><strong>San Francisco Botanical Garden</strong>Winter–Spring</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/SFBG_2.webp"><img loading="lazy" src="posters/thumbs/SFBG_2.webp" width="496" height="700" alt="San Francisco Botanical Garden – Summer–Fall poster"><figcaption><strong>San Francisco Botanical Garden</strong>Summer–Fall</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/SFBG_protandry.webp"><img loading="lazy" src="posters/thumbs/SFBG_protandry.webp" width="505" height="700" alt="Protandry – Movement in flowers poster"><figcaption><strong>Protandry</strong>Movement in flowers</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Bromeliaceae.webp"><img loading="lazy" src="posters/thumbs/Bromeliaceae.webp" width="500" height="700" alt="Bromeliads poster"><figcaption><strong>Bromeliads</strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Rubiaceae.webp"><img loading="lazy" src="posters/thumbs/Rubiaceae.webp" width="500" height="700" alt="Coffee family poster"><figcaption><strong>Coffee family</strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Fuchsia.webp"><img loading="lazy" src="posters/thumbs/Fuchsia.webp" width="500" height="700" alt="Fuchsia poster"><figcaption><strong><em>Fuchsia</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Lonicera.webp"><img loading="lazy" src="posters/thumbs/Lonicera.webp" width="541" height="700" alt="Honeysuckles – Lonicera poster"><figcaption><strong>Honeysuckles</strong><em>Lonicera</em></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Impatiens.webp"><img loading="lazy" src="posters/thumbs/Impatiens.webp" width="500" height="700" alt="Impatiens poster"><figcaption><strong><em>Impatiens</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Magnolia.webp"><img loading="lazy" src="posters/thumbs/Magnolia.webp" width="500" height="700" alt="Magnolia poster"><figcaption><strong><em>Magnolia</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Mallow_poster.webp"><img loading="lazy" src="posters/thumbs/Mallow_poster.webp" width="500" height="700" alt="Mallows – and friends poster"><figcaption><strong>Mallows</strong>and friends</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Myrtles.webp"><img loading="lazy" src="posters/thumbs/Myrtles.webp" width="500" height="700" alt="Myrtles poster"><figcaption><strong>Myrtles</strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Passiflora.webp"><img loading="lazy" src="posters/thumbs/Passiflora.webp" width="500" height="700" alt="Passiflora poster"><figcaption><strong><em>Passiflora</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Melas_collage_orig_3.webp"><img loading="lazy" src="posters/thumbs/Melas_collage_orig_3.webp" width="500" height="700" alt="Princess Flowers – Melastomataceae poster"><figcaption><strong>Princess Flowers</strong>Melastomataceae</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Rhododendron.webp"><img loading="lazy" src="posters/thumbs/Rhododendron.webp" width="500" height="700" alt="Rhododendron poster"><figcaption><strong><em>Rhododendron</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Salvia.webp"><img loading="lazy" src="posters/thumbs/Salvia.webp" width="500" height="700" alt="Salvia poster"><figcaption><strong><em>Salvia</em></strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/Solanaceae.webp"><img loading="lazy" src="posters/thumbs/Solanaceae.webp" width="500" height="700" alt="Solanaceae poster"><figcaption><strong>Solanaceae</strong></figcaption></figure>
+        </div>
+        <h4 class="poster-group">San Francisco and Wisconsin <span>4</span></h4>
+        <div class="poster-grid">
+          <figure class="poster" tabindex="0" data-full="posters/full/SF_native.webp"><img loading="lazy" src="posters/thumbs/SF_native.webp" width="502" height="700" alt="San Francisco Natives poster"><figcaption><strong>San Francisco Natives</strong></figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/ggpark_plants.webp"><img loading="lazy" src="posters/thumbs/ggpark_plants.webp" width="495" height="700" alt="Plants of Golden Gate Park – San Francisco poster"><figcaption><strong>Plants of Golden Gate Park</strong>San Francisco</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/ggpark_mosses.webp"><img loading="lazy" src="posters/thumbs/ggpark_mosses.webp" width="517" height="700" alt="Mosses of Golden Gate Park – San Francisco poster"><figcaption><strong>Mosses of Golden Gate Park</strong>San Francisco</figcaption></figure>
+          <figure class="poster" tabindex="0" data-full="posters/full/poster_madison.webp"><img loading="lazy" src="posters/thumbs/poster_madison.webp" width="489" height="700" alt="Flora of Madison – Wisconsin poster"><figcaption><strong>Flora of Madison</strong>Wisconsin</figcaption></figure>
+        </div>
       </div>
       <dialog id="poster-box" aria-label="Poster viewer">
         <button class="pb-close" aria-label="Close">×</button>

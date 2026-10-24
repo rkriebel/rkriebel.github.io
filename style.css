@@ -174,3 +174,6 @@ ol.pubs { counter-reset: pub 81; }
   .poster-stage.zoomed img { width: 1600px; }
 }
 #poster-box .pb-close, #poster-box .pb-nav { background: rgba(0,0,0,.55); }
+.poster-group { font-size: 1rem; font-weight: 600; margin: 2rem 0 0; padding-bottom: .4rem; border-bottom: 1px solid var(--line); }
+.poster-group span { color: var(--muted); font-weight: 400; font-size: .9rem; margin-left: .3rem; }
+.poster figcaption em { font-style: italic; }
