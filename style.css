@@ -88,6 +88,8 @@ h3.sub { margin-top: 2.5rem; }
 .pubs li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
 .pubs p { margin: 0; }
 .year { font-weight: 600; color: var(--accent); }
+.pubs li.new-year { border-top: 2px solid var(--line); }
+.pubs li:not(.new-year) { border-top: 0; }
 
 .data-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; background: var(--card); border-radius: 12px; overflow: hidden; }
 .data-table th, .data-table td { text-align: left; padding: .8rem 1rem; border-bottom: 1px solid var(--line); }
