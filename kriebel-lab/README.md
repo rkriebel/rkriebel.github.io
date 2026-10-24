@@ -1,4 +1,4 @@
-# Kriebel Lab website
+# Floral Evolution Lab website
 
 A simple, no-build lab website: one page with a banner and four tabs (Research, Publications, Data, Art).
 
