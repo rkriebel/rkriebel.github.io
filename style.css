@@ -113,3 +113,37 @@ footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 2re
 .data-table .authors { font-size: .85rem; color: var(--muted); }
 .data-table td:first-child { color: var(--accent); font-weight: 600; white-space: nowrap; vertical-align: top; }
 .data-table td { vertical-align: top; }
+
+/* Species plates */
+.plate-tools { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1.5rem 0 .5rem; }
+#plate-search { flex: 1 1 220px; max-width: 320px; padding: .6rem .9rem; border: 1px solid var(--line); border-radius: 999px; font: inherit; background: var(--card); color: var(--ink); }
+#plate-search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chips button { font: inherit; font-size: .9rem; border: 1px solid var(--line); background: var(--card); color: var(--muted); padding: .35rem .8rem; border-radius: 999px; cursor: pointer; }
+.chips button span { opacity: .6; font-size: .8em; margin-left: .15rem; }
+.chips button:hover { color: var(--ink); }
+.chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.plate-sub { display: flex; align-items: baseline; gap: .5rem; border-bottom: 1px solid var(--line); padding-bottom: .4rem; }
+.plate-sub span { color: var(--muted); font-weight: 400; font-size: .9rem; }
+.plate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.plate { margin: 0; cursor: zoom-in; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .6rem; transition: box-shadow .15s, transform .15s; }
+.plate:hover, .plate:focus-visible { box-shadow: 0 6px 18px rgba(20,35,46,.12); transform: translateY(-2px); outline: none; }
+.plate img { width: 100%; height: 200px; object-fit: contain; display: block; }
+.plate figcaption { margin-top: .5rem; font-size: .85rem; color: var(--ink); line-height: 1.3; }
+#plate-box { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+#plate-box::backdrop { background: rgba(8,18,26,.88); }
+#plate-box figure { margin: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 4rem 1.5rem; }
+#plate-box img { max-width: 100%; max-height: calc(100vh - 7rem); object-fit: contain; background: #000; border-radius: 8px; }
+#plate-box figcaption { color: #fff; margin-top: .8rem; text-align: center; font-size: 1rem; }
+#plate-box figcaption span { display: block; color: #b9c6cd; font-size: .85rem; }
+.pb-close, .pb-nav { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 999px; cursor: pointer; font-size: 1.8rem; line-height: 1; width: 2.8rem; height: 2.8rem; }
+.pb-close:hover, .pb-nav:hover { background: rgba(255,255,255,.25); }
+.pb-close { top: 1rem; right: 1rem; }
+.pb-nav { top: 50%; transform: translateY(-50%); }
+.pb-prev { left: 1rem; } .pb-next { right: 1rem; }
+@media (max-width: 560px) {
+  .plate-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+  .plate img { height: 150px; }
+  #plate-box figure { padding: 3.5rem .5rem 1rem; }
+  .pb-nav { top: auto; bottom: 1rem; transform: none; }
+}

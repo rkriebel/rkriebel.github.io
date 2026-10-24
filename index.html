@@ -26,6 +26,7 @@
     <a href="#research"     role="tab" data-tab="research">Research</a>
     <a href="#publications" role="tab" data-tab="publications">Publications</a>
     <a href="#data"         role="tab" data-tab="data">Data</a>
+    <a href="#plates"       role="tab" data-tab="plates">Species Plates</a>
     <a href="#art"          role="tab" data-tab="art">Art</a>
     <!-- Add a tab: copy a line above, then copy a <section> below with a matching id -->
   </nav>
@@ -403,6 +404,24 @@
       </table>
     </section>
 
+    <!-- ===== SPECIES PLATES ===== -->
+    <!-- Images live in plates/thumbs and plates/full; the list is plates/plates.json (rebuilt from the salvia_plates folder). -->
+    <section id="plates" class="panel" role="tabpanel">
+      <h2>Species Plates</h2>
+      <p class="lead">Photographic plates of living <em>Salvia</em> flowers, grouped by subgenus. <span id="plate-count"></span> Click any plate to see it full size.</p>
+      <div class="plate-tools">
+        <input type="search" id="plate-search" placeholder="Search species…" aria-label="Search species">
+        <div class="chips" id="plate-chips" role="group" aria-label="Filter by subgenus"></div>
+      </div>
+      <div id="plate-groups"></div>
+      <dialog id="plate-box" aria-label="Plate viewer">
+        <button class="pb-close" aria-label="Close">×</button>
+        <button class="pb-nav pb-prev" aria-label="Previous plate">‹</button>
+        <figure><img id="pb-img" alt=""><figcaption id="pb-cap"></figcaption></figure>
+        <button class="pb-nav pb-next" aria-label="Next plate">›</button>
+      </dialog>
+    </section>
+
     <!-- ===== ART ===== -->
     <section id="art" class="panel" role="tabpanel">
       <h2>Art</h2>
@@ -434,6 +453,67 @@
     window.addEventListener('hashchange', () => show(location.hash.slice(1)));
     show(location.hash.slice(1));
     document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // ===== Species plates =====
+    (function () {
+      const ORDER = ['calosphace','audibertia','salvia','sclarea','heterosphace','glutinaria','rosmarinus','perovskia','dorystaechas','aegyptiaca'];
+      const cap = s => s[0].toUpperCase() + s.slice(1);
+      const groupsEl = document.getElementById('plate-groups');
+      const chipsEl = document.getElementById('plate-chips');
+      const search = document.getElementById('plate-search');
+      const box = document.getElementById('plate-box'), boxImg = document.getElementById('pb-img'), boxCap = document.getElementById('pb-cap');
+      let plates = [], visible = [], current = 0, sub = 'all';
+      const italic = n => n.replace(/^(Salvia \S+)( (subsp\.|var\.) (\S+))?/, (m, a, b, r, e) => '<em>' + a + '</em>' + (b ? ' ' + r + ' <em>' + e + '</em>' : ''));
+
+      fetch('plates/plates.json').then(r => r.json()).then(data => {
+        plates = data.sort((a, b) => ORDER.indexOf(a.s) - ORDER.indexOf(b.s) || a.n.localeCompare(b.n));
+        const species = new Set(plates.map(p => p.n)).size;
+        document.getElementById('plate-count').textContent = plates.length + ' plates of ' + species + ' taxa.';
+        const subs = ORDER.filter(s => plates.some(p => p.s === s));
+        chipsEl.innerHTML = '<button data-s="all" aria-pressed="true">All</button>' +
+          subs.map(s => '<button data-s="' + s + '" aria-pressed="false">' + cap(s) + ' <span>' + plates.filter(p => p.s === s).length + '</span></button>').join('');
+        render();
+      });
+
+      function render() {
+        const q = search.value.trim().toLowerCase();
+        visible = plates.filter(p => (sub === 'all' || p.s === sub) && (!q || p.n.toLowerCase().includes(q)));
+        let html = '', last = null;
+        visible.forEach((p, i) => {
+          if (p.s !== last) {
+            if (last) html += '</div>';
+            const n = visible.filter(v => v.s === p.s).length;
+            html += '<h3 class="sub plate-sub">Subgenus <em>' + cap(p.s) + '</em> <span>' + n + '</span></h3><div class="plate-grid">';
+            last = p.s;
+          }
+          html += '<figure class="plate" data-i="' + i + '" tabindex="0"><img loading="lazy" src="plates/thumbs/' + p.f + '" width="' + p.w + '" height="' + p.h + '" alt="' + p.n + ' plate"><figcaption>' + italic(p.n) + '</figcaption></figure>';
+        });
+        groupsEl.innerHTML = visible.length ? html + '</div>' : '<p class="lead">No plates match that search.</p>';
+      }
+
+      function open(i) {
+        current = (i + visible.length) % visible.length;
+        const p = visible[current];
+        boxImg.src = 'plates/full/' + p.f; boxImg.alt = p.n + ' plate';
+        boxCap.innerHTML = italic(p.n) + ' <span>Subgenus ' + cap(p.s) + (p.v ? ' · ' + p.v : '') + '</span>';
+        if (!box.open) box.showModal();
+      }
+
+      chipsEl.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        sub = b.dataset.s;
+        chipsEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+        render();
+      });
+      search.addEventListener('input', render);
+      groupsEl.addEventListener('click', e => { const f = e.target.closest('.plate'); if (f) open(+f.dataset.i); });
+      groupsEl.addEventListener('keydown', e => { const f = e.target.closest('.plate'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(+f.dataset.i); } });
+      box.querySelector('.pb-close').onclick = () => box.close();
+      box.querySelector('.pb-prev').onclick = () => open(current - 1);
+      box.querySelector('.pb-next').onclick = () => open(current + 1);
+      box.addEventListener('click', e => { if (e.target === box) box.close(); });
+      box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') open(current - 1); if (e.key === 'ArrowRight') open(current + 1); });
+    })();
   </script>
 </body>
 </html>
