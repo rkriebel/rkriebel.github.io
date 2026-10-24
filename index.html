@@ -45,7 +45,6 @@
     <!-- ===== PUBLICATIONS ===== -->
     <section id="publications" class="panel" role="tabpanel">
       <h2>Publications</h2>
-      <p class="lead">80 publications, newest first.</p>
       <!-- To add a paper: copy one <li> ... </li> block below and edit it. -->
       <ol class="pubs">
         <li class="new-year">
@@ -453,6 +452,9 @@
     window.addEventListener('hashchange', () => show(location.hash.slice(1)));
     show(location.hash.slice(1));
     document.getElementById('yr').textContent = new Date().getFullYear();
+    // Number publications automatically, counting down so the newest has the highest number
+    const pubList = document.querySelector('ol.pubs');
+    if (pubList) pubList.style.counterReset = 'pub ' + (pubList.children.length + 1);
 
     // ===== Species plates =====
     (function () {

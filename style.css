@@ -147,3 +147,8 @@ footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 2re
   #plate-box figure { padding: 3.5rem .5rem 1rem; }
   .pb-nav { top: auto; bottom: 1rem; transform: none; }
 }
+
+/* Publication numbers (set by script in index.html) */
+ol.pubs { counter-reset: pub 81; }
+.pubs li { counter-increment: pub -1; }
+.pubs li p::before { content: counter(pub) "."; font-weight: 600; color: var(--muted); margin-right: .5rem; font-variant-numeric: tabular-nums; }
