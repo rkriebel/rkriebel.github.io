@@ -7,7 +7,7 @@
   <meta name="description" content="The Floral Evolution Lab, led by Ricardo Kriebel — research on how flowers evolve.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -425,13 +425,22 @@
     <section id="art" class="panel" role="tabpanel">
       <h2>Art</h2>
       <p class="lead">Where science meets art — images, illustrations and projects from the lab.</p>
-      <!-- Put images in the assets folder and replace the placeholder divs with:
-           <figure><img src="assets/your-image.jpg" alt="description"><figcaption>Caption</figcaption></figure> -->
-      <div class="gallery">
-        <figure><div class="ph">Image 1</div><figcaption>[Caption]</figcaption></figure>
-        <figure><div class="ph">Image 2</div><figcaption>[Caption]</figcaption></figure>
-        <figure><div class="ph">Image 3</div><figcaption>[Caption]</figcaption></figure>
+      <h3 class="sub">Biodiversity Posters</h3>
+      <p class="lead">Each poster brings together the flowers of a single family or region, photographed and arranged by color. Click a poster to view it larger; click again to zoom in.</p>
+      <!-- To add a poster: put the web-sized images in posters/thumbs and posters/full, then copy one <figure> below. -->
+      <div class="poster-grid" id="posters">
+        <figure class="poster" tabindex="0" data-full="posters/full/poster_Acanthaceae_2025.webp"><img loading="lazy" src="posters/thumbs/poster_Acanthaceae_2025.webp" width="487" height="700" alt="Acanthaceae of Costa Rica poster"><figcaption><strong>Acanthaceae</strong> Costa Rica</figcaption></figure>
+        <figure class="poster" tabindex="0" data-full="posters/full/poster_gesneriaceae_CR.webp"><img loading="lazy" src="posters/thumbs/poster_gesneriaceae_CR.webp" width="507" height="700" alt="Gesneriaceae of Costa Rica poster"><figcaption><strong>Gesneriaceae</strong> Costa Rica</figcaption></figure>
+        <figure class="poster" tabindex="0" data-full="posters/full/escazu_flora.webp"><img loading="lazy" src="posters/thumbs/escazu_flora.webp" width="500" height="700" alt="Flora of the Cerros de Escazú poster"><figcaption><strong>Cerros de Escazú</strong> Costa Rica</figcaption></figure>
+        <figure class="poster" tabindex="0" data-full="posters/full/poster_valle_central_2021.webp"><img loading="lazy" src="posters/thumbs/poster_valle_central_2021.webp" width="500" height="700" alt="Flora de San José poster"><figcaption><strong>Flora de San José</strong> Costa Rica</figcaption></figure>
+        <figure class="poster" tabindex="0" data-full="posters/full/poster_madison.webp"><img loading="lazy" src="posters/thumbs/poster_madison.webp" width="489" height="700" alt="Flora of Madison poster"><figcaption><strong>Flora of Madison</strong> Wisconsin</figcaption></figure>
       </div>
+      <dialog id="poster-box" aria-label="Poster viewer">
+        <button class="pb-close" aria-label="Close">×</button>
+        <button class="pb-nav pb-prev" aria-label="Previous poster">‹</button>
+        <div class="poster-stage"><img id="poster-img" alt="" draggable="false"></div>
+        <button class="pb-nav pb-next" aria-label="Next poster">›</button>
+      </dialog>
     </section>
 
   </main>
@@ -515,6 +524,36 @@
       box.querySelector('.pb-next').onclick = () => open(current + 1);
       box.addEventListener('click', e => { if (e.target === box) box.close(); });
       box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') open(current - 1); if (e.key === 'ArrowRight') open(current + 1); });
+    })();
+    // ===== Biodiversity posters =====
+    (function () {
+      const items = [...document.querySelectorAll('#posters .poster')];
+      const box = document.getElementById('poster-box'), img = document.getElementById('poster-img'), stage = box.querySelector('.poster-stage');
+      let cur = 0;
+      function open(i) {
+        cur = (i + items.length) % items.length;
+        stage.classList.remove('zoomed');
+        img.src = items[cur].dataset.full; img.alt = items[cur].querySelector('img').alt;
+        if (!box.open) box.showModal();
+      }
+      items.forEach((f, i) => {
+        f.addEventListener('click', () => open(i));
+        f.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+      });
+      img.addEventListener('click', e => {
+        const r = img.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+        stage.classList.toggle('zoomed');
+        if (stage.classList.contains('zoomed')) { stage.scrollLeft = fx * img.offsetWidth - stage.clientWidth / 2; stage.scrollTop = fy * img.offsetHeight - stage.clientHeight / 2; }
+      });
+      box.querySelector('.pb-close').onclick = () => box.close();
+      box.querySelector('.pb-prev').onclick = () => open(cur - 1);
+      box.querySelector('.pb-next').onclick = () => open(cur + 1);
+      box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') open(cur - 1); if (e.key === 'ArrowRight') open(cur + 1); });
+      // Discourage saving: no right-click or drag on poster images
+      document.querySelectorAll('#posters img, #poster-img').forEach(el => {
+        el.addEventListener('contextmenu', e => e.preventDefault());
+        el.addEventListener('dragstart', e => e.preventDefault());
+      });
     })();
   </script>
 </body>
