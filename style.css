@@ -177,3 +177,13 @@ ol.pubs { counter-reset: pub 81; }
 .poster-group { font-size: 1rem; font-weight: 600; margin: 2rem 0 0; padding-bottom: .4rem; border-bottom: 1px solid var(--line); }
 .poster-group span { color: var(--muted); font-weight: 400; font-size: .9rem; margin-left: .3rem; }
 .poster figcaption em { font-style: italic; }
+
+/* Plate collection switch (Salvia / Melastomataceae) */
+.set-switch { display: inline-flex; gap: .3rem; padding: .3rem; background: #ecebe4; border-radius: 999px; margin: .5rem 0 .25rem; flex-wrap: wrap; }
+.set-switch button { font: inherit; border: 0; background: transparent; color: var(--muted); padding: .55rem 1.1rem; border-radius: 999px; cursor: pointer; }
+.set-switch button strong { color: var(--ink); font-weight: 600; margin-right: .2rem; }
+.set-switch button:hover strong { color: var(--accent); }
+.set-switch button[aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(20,35,46,.12); }
+.set-switch button[aria-selected="true"] strong { color: var(--accent); }
+.plate-sub em { font-style: italic; }
+@media (max-width: 560px) { .set-switch { display: flex; border-radius: 14px; } .set-switch button { flex: 1 1 100%; border-radius: 10px; text-align: left; } }
