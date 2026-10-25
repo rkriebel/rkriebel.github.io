@@ -25,7 +25,8 @@
 
   <!-- ===== TABS ===== -->
   <nav class="tabs" role="tablist" aria-label="Site sections">
-    <a href="#research"     role="tab" data-tab="research">Research</a>
+    <!-- Research tab hidden while it is being written. To restore: uncomment the line below and remove "hidden" from the Research section.
+    <a href="#research"     role="tab" data-tab="research">Research</a> -->
     <a href="#publications" role="tab" data-tab="publications">Publications</a>
     <a href="#data"         role="tab" data-tab="data">Data</a>
     <a href="#plates"       role="tab" data-tab="plates">Species Plates</a>
@@ -35,8 +36,8 @@
 
   <main>
 
-    <!-- ===== RESEARCH ===== -->
-    <section id="research" class="panel" role="tabpanel">
+    <!-- ===== RESEARCH ===== (hidden for now; remove "hidden" below to restore) -->
+    <section id="research" class="panel" role="tabpanel" hidden>
       <h2>Welcome!</h2>
       <p class="lead">I am a Costa Rican biologist passionate about exploring and conserving plant diversity. My academic training includes a master’s degree in ecology and systematic biology from San Francisco State University, a Ph.D. in plant sciences from the City University of New York, and postdoctoral research at the University of Wisconsin–Madison. I currently serve as Assistant Curator and McAllister Chair of Botany at the California Academy of Sciences. My research centers on the taxonomy and evolution of the princess flower family (Melastomataceae) and the diverse genus <em>Salvia</em>, but I am broadly interested in the evolution and diversity of flowers.</p>
       <!-- Research content coming soon. When ready, add it here, e.g.:
@@ -492,7 +493,7 @@
   <script>
     // Simple tab switching driven by the URL (#research, #publications, ...)
     const tabs = document.querySelectorAll('.tabs a');
-    const panels = document.querySelectorAll('.panel');
+    const panels = document.querySelectorAll('.panel:not([hidden])'); // hidden panels are skipped; #research falls back to the first visible tab
     function show(id) {
       if (![...panels].some(p => p.id === id)) id = panels[0].id;
       panels.forEach(p => p.classList.toggle('active', p.id === id));
