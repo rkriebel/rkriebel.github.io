@@ -27,7 +27,7 @@
     <a href="#publications" role="tab" data-tab="publications">Publications</a>
     <a href="#data"         role="tab" data-tab="data">Data</a>
     <a href="#plates"       role="tab" data-tab="plates">Species Plates</a>
-    <a href="#art"          role="tab" data-tab="art">Art</a>
+    <a href="#posters"      role="tab" data-tab="posters">Biodiversity Posters</a>
     <!-- Add a tab: copy a line above, then copy a <section> below with a matching id -->
   </nav>
 
@@ -421,14 +421,12 @@
       </dialog>
     </section>
 
-    <!-- ===== ART ===== -->
-    <section id="art" class="panel" role="tabpanel">
-      <h2>Art</h2>
-      <p class="lead">Where science meets art — images, illustrations and projects from the lab.</p>
-      <h3 class="sub">Biodiversity Posters</h3>
-      <p class="lead">Each poster brings together the flowers of a single family or region, photographed and arranged by color. Click a poster to view it larger; click again to zoom in.</p>
+    <!-- ===== BIODIVERSITY POSTERS ===== -->
+    <section id="posters" class="panel" role="tabpanel">
+      <h2>Biodiversity Posters</h2>
+      <p class="lead">The plants of a family, a garden or a landscape, photographed from living plants and brought together in a single image. Click a poster to view it larger; click again to zoom in.</p>
       <!-- To add a poster: put the web-sized images in posters/thumbs and posters/full, then copy one <figure> below. -->
-      <div id="posters">
+      <div id="poster-list">
         <h4 class="poster-group">Costa Rica <span>5</span></h4>
         <div class="poster-grid">
           <figure class="poster" tabindex="0" data-full="posters/full/poster_Acanthaceae_2025.webp"><img loading="lazy" src="posters/thumbs/poster_Acanthaceae_2025.webp" width="487" height="700" alt="Acanthaceae – Costa Rica poster"><figcaption><strong>Acanthaceae</strong>Costa Rica</figcaption></figure>
@@ -488,8 +486,9 @@
       panels.forEach(p => p.classList.toggle('active', p.id === id));
       tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.tab === id));
     }
-    window.addEventListener('hashchange', () => show(location.hash.slice(1)));
-    show(location.hash.slice(1));
+    const alias = h => h === 'art' ? 'posters' : h; // old #art links still work
+    window.addEventListener('hashchange', () => show(alias(location.hash.slice(1))));
+    show(alias(location.hash.slice(1)));
     document.getElementById('yr').textContent = new Date().getFullYear();
     // Number publications automatically, counting down so the newest has the highest number
     const pubList = document.querySelector('ol.pubs');
@@ -557,7 +556,7 @@
     })();
     // ===== Biodiversity posters =====
     (function () {
-      const items = [...document.querySelectorAll('#posters .poster')];
+      const items = [...document.querySelectorAll('#poster-list .poster')];
       const box = document.getElementById('poster-box'), img = document.getElementById('poster-img'), stage = box.querySelector('.poster-stage');
       let cur = 0;
       function open(i) {
@@ -580,7 +579,7 @@
       box.querySelector('.pb-next').onclick = () => open(cur + 1);
       box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') open(cur - 1); if (e.key === 'ArrowRight') open(cur + 1); });
       // Discourage saving: no right-click or drag on poster images
-      document.querySelectorAll('#posters img, #poster-img').forEach(el => {
+      document.querySelectorAll('#poster-list img, #poster-img').forEach(el => {
         el.addEventListener('contextmenu', e => e.preventDefault());
         el.addEventListener('dragstart', e => e.preventDefault());
       });
