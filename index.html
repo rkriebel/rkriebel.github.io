@@ -407,6 +407,7 @@
     <!-- Salvia: plates/thumbs, plates/full, plates/plates.json (from salvia_plates). Melastomataceae: melas/thumbs, melas/full, melas/plates.json (from melas_plates). Intro text for each is in the SETS list in the script below. -->
     <section id="plates" class="panel" role="tabpanel">
       <h2>Species Plates</h2>
+      <p class="lead">Photographic plates of Princess Flowers and Sages, showing leaves, flowers and floral dissections from living plants. Click any plate to see it full size.</p>
       <div class="set-switch" id="plate-sets" role="tablist" aria-label="Plate collections">
         <button role="tab" data-set="salvia" aria-selected="true"><strong>Sages</strong> <em>Salvia</em></button>
         <button role="tab" data-set="melas" aria-selected="false"><strong>Princess flowers</strong> Melastomataceae</button>
@@ -509,11 +510,11 @@
         salvia: {
           dir: 'plates', label: 'Subgenus', italicGroup: true,
           order: ['calosphace','audibertia','salvia','sclarea','heterosphace','glutinaria','rosmarinus','perovskia','dorystaechas','aegyptiaca'],
-          lead: 'Photographic plates of <em>Salvia</em> leaves, flowers and floral dissections from living plants, grouped by subgenus. The plates were made in collaboration with Dr. Bryan Drew (University of Nebraska at Kearney) and Dr. Ken Sytsma (University of Wisconsin–Madison).'
+          lead: 'Sages (<em>Salvia</em>), grouped by subgenus. The plates were made in collaboration with Dr. Bryan Drew (University of Nebraska at Kearney) and Dr. Ken Sytsma (University of Wisconsin–Madison).'
         },
         melas: {
           dir: 'melas', label: '', italicGroup: true, order: null,
-          lead: 'Photographic plates of Melastomataceae leaves, flowers and floral dissections from living plants, grouped by genus.'
+          lead: 'Princess flowers (Melastomataceae), grouped by genus.'
         }
       };
       const cap = s => s[0].toUpperCase() + s.slice(1);
@@ -538,7 +539,7 @@
           const rank = g => c.order ? c.order.indexOf(g) : 0;
           plates = data.slice().sort((a, b) => rank(a.s) - rank(b.s) || a.s.localeCompare(b.s) || a.n.localeCompare(b.n));
           const taxa = new Set(plates.map(p => p.n)).size;
-          leadEl.innerHTML = c.lead + ' ' + plates.length + ' plates of ' + taxa + ' taxa. Click any plate to see it full size.';
+          leadEl.innerHTML = c.lead + ' ' + plates.length + ' plates of ' + taxa + ' taxa.';
           const groups = [...new Set(plates.map(p => p.s))];
           chipsEl.setAttribute('aria-label', 'Filter by ' + (c.label ? c.label.toLowerCase() : 'genus'));
           chipsEl.innerHTML = '<button data-s="all" aria-pressed="true">All</button>' +
