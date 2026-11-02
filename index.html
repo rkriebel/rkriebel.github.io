@@ -7,7 +7,7 @@
   <meta name="description" content="The Floral Evolution Lab, led by Ricardo Kriebel — research on how flowers evolve.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -431,7 +431,7 @@
     <!-- ===== BIODIVERSITY POSTERS ===== -->
     <section id="posters" class="panel" role="tabpanel">
       <h2>Biodiversity Posters</h2>
-      <p class="lead">The plants of particular groups or places, photographed from living plants and brought together in a single image. Click a poster to view it larger; click again to zoom in.</p>
+      <p class="lead">The plants of particular groups or places, photographed from living plants and brought together in a single image. Click a poster to view it larger, use the arrows to move between posters, and click the poster again to zoom in on detail.</p>
       <!-- To add a poster: put the web-sized images in posters/thumbs and posters/full, then copy one <figure> below. -->
       <div id="poster-list">
         <h4 class="poster-group">Costa Rica <span>5</span></h4>
@@ -478,7 +478,7 @@
       <dialog id="poster-box" aria-label="Poster viewer">
         <button class="pb-close" aria-label="Close">×</button>
         <button class="pb-nav pb-prev" aria-label="Previous poster">‹</button>
-        <div class="poster-stage"><img id="poster-img" alt="" draggable="false"></div>
+        <div class="poster-stage"><img id="poster-img" alt="" draggable="false"><p id="poster-cap"></p></div>
         <button class="pb-nav pb-next" aria-label="Next poster">›</button>
       </dialog>
     </section>
@@ -595,12 +595,14 @@
     // ===== Biodiversity posters =====
     (function () {
       const items = [...document.querySelectorAll('#poster-list .poster')];
-      const box = document.getElementById('poster-box'), img = document.getElementById('poster-img'), stage = box.querySelector('.poster-stage');
+      const box = document.getElementById('poster-box'), img = document.getElementById('poster-img'), capEl = document.getElementById('poster-cap'), stage = box.querySelector('.poster-stage');
       let cur = 0;
       function open(i) {
         cur = (i + items.length) % items.length;
         stage.classList.remove('zoomed');
         img.src = items[cur].dataset.full; img.alt = items[cur].querySelector('img').alt;
+        const fc = items[cur].querySelector('figcaption'), t = fc.querySelector('strong');
+        capEl.innerHTML = t.innerHTML + (fc.textContent.trim() !== t.textContent.trim() ? ' <span>' + fc.innerHTML.replace(t.outerHTML, '').trim() + '</span>' : '');
         if (!box.open) box.showModal();
       }
       items.forEach((f, i) => {
@@ -615,6 +617,7 @@
       box.querySelector('.pb-close').onclick = () => box.close();
       box.querySelector('.pb-prev').onclick = () => open(cur - 1);
       box.querySelector('.pb-next').onclick = () => open(cur + 1);
+      box.addEventListener('click', e => { if ((e.target === box || e.target === stage) && !stage.classList.contains('zoomed')) box.close(); });
       box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') open(cur - 1); if (e.key === 'ArrowRight') open(cur + 1); });
       // Discourage saving: no right-click or drag on poster images
       document.querySelectorAll('#poster-list img, #poster-img').forEach(el => {
